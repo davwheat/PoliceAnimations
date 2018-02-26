@@ -28,6 +28,33 @@ AddEventHandler( 'aa:kneelhu', function()
     end
 end )
 
+
+AddEventHandler( 'aa:radio', function()
+  local ped = PlayerPedId()
+  if DoesEntityExist( ped ) and not IsEntityDead( ped ) then
+    if not IsPauseMenuActive() then 
+      loadAnimDict( "random@arrests" )
+      if IsControlJustReleased( 0, 88 ) then
+        ClearPedTasks(ped)
+        SetEnableHandcuffs(ped, false)
+      else
+        if not IsPlayerFreeAiming(PlayerId()) then
+          TaskPlayAnim(ped, "random@arrests", "generic_radio_enter", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0 )
+          SetEnableHandcuffs(ped, true)
+        elseif IsPlayerFreeAiming(PlayerId()) then
+          TaskPlayAnim(ped, "random@arrests", "radio_chatter", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0 )
+				  SetEnableHandcuffs(ped, true)
+			  end 
+				if IsEntityPlayingAnim(GetPlayerPed(PlayerId()), "random@arrests", "generic_radio_enter", 3) then
+					DisableActions(ped)
+				elseif IsEntityPlayingAnim(GetPlayerPed(PlayerId()), "random@arrests", "radio_chatter", 3) then
+				  DisableActions(ped)
+        end
+      end
+    end 
+  end
+end)
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -36,6 +63,8 @@ Citizen.CreateThread(function()
 			DisableControlAction(1, 141, true)
 			DisableControlAction(1, 142, true)
 			DisableControlAction(0,21,true)
+      DisableControlAction(1, 37, true) -- Disables INPUT_SELECT_WEAPON (TAB)
+      DisablePlayerFiring(ped, true) -- Disable weapon firing
 		end
 	end
 end)
