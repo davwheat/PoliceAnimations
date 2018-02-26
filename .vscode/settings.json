@@ -1,0 +1,7 @@
+{
+    "editor.renderWhitespace": "boundary",
+    "lua.targetVersion": "5.3",
+    "editor.wordWrap": "bounded",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+}
