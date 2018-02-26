@@ -5,9 +5,9 @@ function loadAnimDict( dict )
     end
 end 
 
-RegisterNetEvent( 'aa:kneelhu' )
+RegisterNetEvent( 'pa:kneelhu' )
 
-AddEventHandler( 'aa:kneelhu', function()
+AddEventHandler( 'pa:kneelhu', function()
     local player = GetPlayerPed( -1 )
 	if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
         loadAnimDict( "random@arrests" )
@@ -28,8 +28,9 @@ AddEventHandler( 'aa:kneelhu', function()
     end
 end )
 
+RegisterNetEvent( 'pa:radio' )
 
-AddEventHandler( 'aa:radio', function()
+AddEventHandler( 'pa:radio', function()
   local ped = PlayerPedId()
   if DoesEntityExist( ped ) and not IsEntityDead( ped ) then
     if not IsPauseMenuActive() then 
