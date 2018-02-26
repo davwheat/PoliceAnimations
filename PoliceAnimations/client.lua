@@ -85,10 +85,10 @@ AddEventHandler(
           end
           if IsEntityPlayingAnim(ped, "random@arrests", "generic_radio_chatter", 3) then
             ClearPedSecondaryTask(ped)
-            SetCurrentPedWeapon(ped, GetHashKey("GENERIC_RADIO_CHATTER"), true)
+            SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
           else
             TaskPlayAnim(ped, "random@arrests", "generic_radio_chatter", 8.0, 2.5, -1, 49, 0, 0, 0, 0)
-            SetCurrentPedWeapon(ped, GetHashKey("GENERIC_RADIO_CHATTER"), true)
+            SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
           end
         end
       )
