@@ -1,4 +1,4 @@
---   _____                           _ 
+--   _____                           _
 --  / ____|                         | |
 -- | |  __  ___ _ __   ___ _ __ __ _| |
 -- | | |_ |/ _ \ '_ \ / _ \ '__/ _` | |
@@ -12,11 +12,11 @@ function loadAnimDict(dict)
   end
 end
 
--- _  __                _                  _                 _   _              
--- | |/ /               | |     /\         (_)               | | (_)             
--- | ' / _ __   ___  ___| |    /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __   
--- |  < | '_ \ / _ \/ _ \ |   / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \  
--- | . \| | | |  __/  __/ |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | | 
+--  _  __                _                  _                 _   _
+-- | |/ /               | |     /\         (_)               | | (_)
+-- | ' / _ __   ___  ___| |    /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __
+-- |  < | '_ \ / _ \/ _ \ |   / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \
+-- | . \| | | |  __/  __/ |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | |
 -- |_|\_\_| |_|\___|\___|_| /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
 
 RegisterNetEvent("pa:kneelhu")
@@ -62,9 +62,35 @@ Citizen.CreateThread(
   end
 )
 
--- _____           _ _                        _                 _   _              
--- |  __ \         | (_)           /\         (_)               | | (_)             
--- | |__) |__ _  __| |_  ___      /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __   
--- |  _  // _` |/ _` | |/ _ \    / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \  
--- | | \ \ (_| | (_| | | (_) |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | | 
+--  _____           _ _                        _                 _   _
+-- |  __ \         | (_)           /\         (_)               | | (_)
+-- | |__) |__ _  __| |_  ___      /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __
+-- |  _  // _` |/ _` | |/ _ \    / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \
+-- | | \ \ (_| | (_| | | (_) |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | |
 -- |_|  \_\__,_|\__,_|_|\___/  /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
+
+RegisterNetEvent("pa:radio")
+AddEventHandler(
+  "pa:radio",
+  function()
+    local ped = GetPlayerPed(-1)
+
+    if (DoesEntityExist(ped) and not IsEntityDead(ped)) then
+      Citizen.CreateThread(
+        function()
+          RequestAnimDict("random@arrests")
+          while (not HasAnimDictLoaded("random@arrests")) do
+            Citizen.Wait(100)
+          end
+          if IsEntityPlayingAnim(ped, "random@arrests", "generic_radio_chatter", 3) then
+            ClearPedSecondaryTask(ped)
+            SetCurrentPedWeapon(ped, GetHashKey("GENERIC_RADIO_CHATTER"), true)
+          else
+            TaskPlayAnim(ped, "random@arrests", "generic_radio_chatter", 8.0, 2.5, -1, 49, 0, 0, 0, 0)
+            SetCurrentPedWeapon(ped, GetHashKey("GENERIC_RADIO_CHATTER"), true)
+          end
+        end
+      )
+    end
+  end
+)
