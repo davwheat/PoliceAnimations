@@ -1,9 +1,23 @@
+--   _____                           _ 
+--  / ____|                         | |
+-- | |  __  ___ _ __   ___ _ __ __ _| |
+-- | | |_ |/ _ \ '_ \ / _ \ '__/ _` | |
+-- | |__| |  __/ | | |  __/ | | (_| | |
+--  \_____|\___|_| |_|\___|_|  \__,_|_|
+
 function loadAnimDict(dict)
   while (not HasAnimDictLoaded(dict)) do
     RequestAnimDict(dict)
     Citizen.Wait(5)
   end
 end
+
+-- _  __                _                  _                 _   _              
+-- | |/ /               | |     /\         (_)               | | (_)             
+-- | ' / _ __   ___  ___| |    /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __   
+-- |  < | '_ \ / _ \/ _ \ |   / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \  
+-- | . \| | | |  __/  __/ |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | | 
+-- |_|\_\_| |_|\___|\___|_| /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
 
 RegisterNetEvent("pa:kneelhu")
 
@@ -31,38 +45,7 @@ AddEventHandler(
   end
 )
 
-RegisterNetEvent("pa:radio")
-
-AddEventHandler(
-  "pa:radio",
-  function()
-    local ped = PlayerPedId()
-    if DoesEntityExist(ped) and not IsEntityDead(ped) then
-      if not IsPauseMenuActive() then
-        loadAnimDict("random@arrests")
-        if IsControlJustReleased(0, 88) then
-          ClearPedTasks(ped)
-          SetEnableHandcuffs(ped, false)
-        else
-          if not IsPlayerFreeAiming(PlayerId()) then
-            TaskPlayAnim(ped, "random@arrests", "generic_radio_enter", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0)
-            SetEnableHandcuffs(ped, true)
-          elseif IsPlayerFreeAiming(PlayerId()) then
-            TaskPlayAnim(ped, "random@arrests", "radio_chatter", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0)
-            SetEnableHandcuffs(ped, true)
-          end
-          if IsEntityPlayingAnim(GetPlayerPed(PlayerId()), "random@arrests", "generic_radio_enter", 3) then
-            DisableActions(ped)
-          elseif IsEntityPlayingAnim(GetPlayerPed(PlayerId()), "random@arrests", "radio_chatter", 3) then
-            DisableActions(ped)
-          end
-        end
-      end
-    end
-  end
-)
-
---Disables the player's controls during the RAdio animation
+--Disables the player's controls during the Kneel animation
 Citizen.CreateThread(
   function()
     while true do
@@ -79,11 +62,9 @@ Citizen.CreateThread(
   end
 )
 
--- Disables the player's controls during the Radio animation.
-function DisableActions(ped)
-  DisableControlAction(1, 140, true)
-  DisableControlAction(1, 141, true)
-  DisableControlAction(1, 142, true)
-  DisableControlAction(1, 37, true) -- Disables INPUT_SELECT_WEAPON (TAB)
-  DisablePlayerFiring(ped, true) -- Disable weapon firing
-end
+-- _____           _ _                        _                 _   _              
+-- |  __ \         | (_)           /\         (_)               | | (_)             
+-- | |__) |__ _  __| |_  ___      /  \   _ __  _ _ __ ___   __ _| |_ _  ___  _ __   
+-- |  _  // _` |/ _` | |/ _ \    / /\ \ | '_ \| | '_ ` _ \ / _` | __| |/ _ \| '_ \  
+-- | | \ \ (_| | (_| | | (_) |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | | 
+-- |_|  \_\__,_|\__,_|_|\___/  /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
