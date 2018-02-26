@@ -19,10 +19,9 @@ end
 -- | . \| | | |  __/  __/ |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | |
 -- |_|\_\_| |_|\___|\___|_| /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
 
-RegisterNetEvent("pa:kneelhu")
+RegisterNetEvent('pa:kneelhu')
 
-AddEventHandler(
-  "pa:kneelhu",
+AddEventHandler('pa:kneelhu',
   function()
     local player = GetPlayerPed(-1)
     if (DoesEntityExist(player) and not IsEntityDead(player)) then
@@ -69,10 +68,9 @@ Citizen.CreateThread(
 -- | | \ \ (_| | (_| | | (_) |  / ____ \| | | | | | | | | | (_| | |_| | (_) | | | |
 -- |_|  \_\__,_|\__,_|_|\___/  /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
 
-RegisterNetEvent("pa:radio")
+RegisterNetEvent('pa:radio')
 
-AddEventHandler(
-  "pa:radio",
+AddEventHandler('pa:radio',
   function()
     local ped = GetPlayerPed(-1)
 
