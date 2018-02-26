@@ -70,6 +70,7 @@ Citizen.CreateThread(
 -- |_|  \_\__,_|\__,_|_|\___/  /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
 
 RegisterNetEvent("pa:radio")
+
 AddEventHandler(
   "pa:radio",
   function()
