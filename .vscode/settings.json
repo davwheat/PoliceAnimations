@@ -1,5 +1,4 @@
 {
-    "editor.renderWhitespace": "boundary",
     "lua.targetVersion": "5.3",
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
