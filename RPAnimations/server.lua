@@ -7,6 +7,12 @@ AddEventHandler('chatMessage',
     elseif msg == "/r" or msg == "/radio" then
       CancelEvent()
       TriggerClientEvent('pa:radio', source)
+    elseif msg == "/l" or msg == "/lie" or msg == "/liedown" then
+      CancelEvent()
+      TriggerClientEvent('pa:liedown', source)
+    elseif msg == "/cpr" or msg == "/c" then
+      CancelEvent()
+      TriggerClientEvent('pa:cpr', source)
     end
   end
 )
