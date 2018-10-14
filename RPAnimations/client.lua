@@ -39,6 +39,7 @@ Citizen.CreateThread(
 -- |_|\_\_| |_|\___|\___|_| /_/    \_\_| |_|_|_| |_| |_|\__,_|\__|_|\___/|_| |_|
 
 RegisterNetEvent('pa:kneelhu')
+local isKneeling = false
 
 AddEventHandler('pa:kneelhu',
   function()
@@ -47,17 +48,32 @@ AddEventHandler('pa:kneelhu',
       loadAnimDict("random@arrests")
       loadAnimDict("random@arrests@busted")
       if (IsEntityPlayingAnim(player, "random@arrests@busted", "idle_a", 3)) then
+        isKneeling = false
+        ClearPedTasksImmediately(ped)
+        ClearPedTasks(ped)
+        ClearPedSecondaryTask(ped)
         TaskPlayAnim(player, "random@arrests@busted", "exit", 8.0, 1.0, -1, 2, 0, 0, 0, 0)
         Wait(3000)
 				TaskPlayAnim(player, "random@arrests", "kneeling_arrest_get_up", 8.0, 1.0, -1, 128, 0, 0, 0, 0)
 				BlockControls = false
 			else
-				BlockControls = true
+        BlockControls = true
+        isKneeling = true
+        
         TaskPlayAnim(player, "random@arrests", "idle_2_hands_up", 8.0, 1.0, -1, 2, 0, 0, 0, 0)
+        if isKneeling == false then
+          return
+        end
         Wait(4000)
         TaskPlayAnim(player, "random@arrests", "kneeling_arrest_idle", 8.0, 1.0, -1, 2, 0, 0, 0, 0)
+        if isKneeling == false then
+          return
+        end
         Wait(500)
         TaskPlayAnim(player, "random@arrests@busted", "enter", 8.0, 1.0, -1, 2, 0, 0, 0, 0)
+        if isKneeling == false then
+          return
+        end
         Wait(1000)
         TaskPlayAnim(player, "random@arrests@busted", "idle_a", 8.0, 1.0, -1, 9, 0, 0, 0, 0)
       end
@@ -107,9 +123,9 @@ AddEventHandler('pa:radio',
 --                           __/ |
 --                          |___/ 
 
-RegisterNetEvent('pa:liedown')
+RegisterNetEvent('pa:sit')
 
-AddEventHandler('pa:liedown',
+AddEventHandler('pa:sit',
   function()
     local ped = GetPlayerPed(-1)
 
@@ -211,8 +227,14 @@ AddEventHandler('pa:cpr',
             DoingCPR = true
 
             TaskPlayAnim(ped, "mini@cpr@char_a@cpr_str", "cpr_kol", 8.0, 0, -1, 0, 0, 0, 0, 0) -- CPR Breath (play first) mini@cpr@char_a@cpr_def  cpr_kol 7466 
+            if DoingCPR == false then
+              return
+            end
             Wait(7466)
             TaskPlayAnim(ped, "mini@cpr@char_a@cpr_str", "cpr_kol_to_cpr", 8.0, 0, -1, 0, 0, 0, 0, 0) -- CPR Breath (play first) mini@cpr@char_a@cpr_def  cpr_kol 7466 
+            if DoingCPR == false then
+              return
+            end
             Wait(1566)
             TaskPlayAnim(ped, "mini@cpr@char_a@cpr_str", "cpr_pumpchest", 8.0, 0, -1, 1, 0, 0, 0, 1) -- CPR Chest Pump (play second) mini@cpr@char_a@cpr_st cpr_pumpchest 1000
           end
