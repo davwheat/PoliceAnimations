@@ -132,11 +132,11 @@ AddEventHandler('pa:sit',
     if (DoesEntityExist(ped) and not IsEntityDead(ped)) then
       Citizen.CreateThread(
         function()
-          RequestAnimDict("switch@michael@sitting")
-          while (not HasAnimDictLoaded("switch@michael@sitting")) do
+          RequestAnimDict("amb@world_human_picnic@male@base")
+          while (not HasAnimDictLoaded("amb@world_human_picnic@male@base")) do
             Citizen.Wait(100)
           end
-          if IsEntityPlayingAnim(ped, "switch@michael@sitting", "idle", 3) then
+          if IsEntityPlayingAnim(ped, "amb@world_human_picnic@male@base", "base", 3) then
             BlockControls = false
             ClearPedTasksImmediately(ped)
             ClearPedTasks(ped)
@@ -144,7 +144,7 @@ AddEventHandler('pa:sit',
             SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
           else
             BlockControls = true
-            TaskPlayAnim(ped, "switch@michael@sitting", "idle", 8.0, 2.5, -1, 1, 0, 0, 0, 0)
+            TaskPlayAnim(ped, "amb@world_human_picnic@male@base", "base", 8.0, 2.5, -1, 1, 0, 0, 0, 0)
             SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
           end
         end
