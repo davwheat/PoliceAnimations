@@ -16,4 +16,4 @@ Type `/l`, `/lie` or `/liedown` in chat to lie motionless on the floor
 
 Type `/s` or `/sit` in chat to lie motionless on the floor
 
-Type `/c` or `/cpr` in chat to complete a rescue breath and begin chest compressions. You can use it again to immediately stop CPR~~, or you can use `/cfail` or `/csuccess` to end in a nicer animation.~~
+Type `/c` or `/cpr` in chat to complete a rescue breath and begin chest compressions. You can use it again to immediately stop CPR ~~, or you can use `/cfail` or `/csuccess` to end in a nicer animation.~~
